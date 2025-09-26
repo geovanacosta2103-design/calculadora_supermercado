@@ -42,7 +42,7 @@ Ou, se você configurou o GitHub Pages (o que fizemos!):
 
 ## 🧑‍💻 Autor
 
-*   **geovanacosta2103** - [GitHub Profile](https://github.com/geovanacosta2103)
+*   **geovanacosta2103** - [GitHub Profile](https://github.com/geovanacosta2103-design/)
 
 ---
 
