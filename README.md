@@ -38,7 +38,7 @@ Para ver a calculadora em funcionamento, siga os passos abaixo:
 Ou, se você configurou o GitHub Pages (o que fizemos!):
 
 4.  **Acesse via GitHub Pages:**
-    Vá para [GitHub Profile]`geovanacosta2103-design.github.io`  no seu navegador.
+    Vá para [GitHub Profile]`https://github.com/geovanacosta2103-design`  no seu navegador.
 
 ## 🧑‍💻 Autor
 
