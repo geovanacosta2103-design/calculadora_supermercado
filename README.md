@@ -90,7 +90,7 @@ To see the calculator in action, follow these steps:
 Or, if you have configured GitHub Pages (which we did!):
 
 **Access via GitHub Pages:**
-    Go to https://geovanacosta2103-design.github.io/calculadora_supermercado/ in your browser.
+       Go to https://geovanacosta2103-design.github.io/calculadora_supermercado/ in your browser.
 
 
 ## 🧑‍💻 Author
