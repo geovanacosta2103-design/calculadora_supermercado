@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrinho de Compras</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+    }
+
+    h1 {
+        color: #9e2de0;
+    }
+
+    input, button {
+        padding: 10px;
+        margin: 5px;
+        font-size: 16px;
+    }
+
+    button {
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.2s;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    #cart {
+        margin-top: 20px;
+        width: 350px;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    #cart ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    #cart li {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #total {
+        font-weight: bold;
+        margin-top: 10px;
+        text-align: right;
+    }
+
+    .delete-icon {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .delete-icon:hover {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+</style>
+</head>
+<body>
+
+<h1>Carrinho de Compras</h1>
+
+<input type="number" id="productValue" placeholder="Digite o valor do produto">
+<div class="button-group">
+    <button onclick="addProduct()">Adicionar Produto</button>
+    <button onclick="clearCart()">Limpar Carrinho</button>
+</div>
+
+<div id="cart">
+    <h2>Produtos</h2>
+    <ul id="productList"></ul>
+    <div id="total">Total: R$0.00</div>
+</div>
+
+<script>
+let cart = [];
+let total = 0;
+
+// Adiciona produto ao carrinho
+function addProduct() {
+    const input = document.getElementById("productValue");
+    let value = parseFloat(input.value);
+
+    if (isNaN(value) || value <= 0) {
+        alert("Digite um valor válido!");
+        return;
+    }
+
+    cart.push(value); // adiciona ao array
+    recalcTotal(); // recalcula total e atualiza lista
+    input.value = "";
+    input.focus();
+}
+
+// Limpa carrinho
+function clearCart() {
+    cart = [];
+    total = 0;
+    updateCartDisplay();
+}
+
+// Exclui produto do carrinho
+function deleteProduct(index) {
+    cart.splice(index, 1);
+    recalcTotal();
+}
+
+// Recalcula total aplicando desconto quando necessário
+function recalcTotal() {
+    total = 0;
+    cart.forEach(v => {
+        if (v > 100) {
+            total += v * 0.9; // aplica 10% de desconto
+        } else {
+            total += v;
+        }
+    });
+    updateCartDisplay();
+}
+
+// Atualiza lista de produtos e total na tela
+function updateCartDisplay() {
+    const productList = document.getElementById("productList");
+    productList.innerHTML = "";
+
+    cart.forEach((v, i) => {
+        let itemText = v > 100 
+            ? `Produto ${i + 1}: R$${v.toFixed(2)} (10% de desconto)` 
+            : `Produto ${i + 1}: R$${v.toFixed(2)}`;
+
+        productList.innerHTML += `
+            <li>
+                <span>${itemText}</span>
+                <img src="img/excluir.png" alt="Excluir" class="delete-icon" onclick="deleteProduct(${i})">
+            </li>`;
+    });
+
+    document.getElementById("total").innerText = `Total: R$${total.toFixed(2)}`;
+}
+</script>
+
+</body>
+</html>
