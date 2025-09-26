@@ -26,7 +26,7 @@ Para ver a calculadora em funcionamento, siga os passos abaixo:
 
 1.  **Clone o repositório:**
     ```bash
-    git clone https://github.com/geovanacosta2103-design/calculadora_supermercado.git 
+    git clone https://geovanacosta2103-design.github.io/calculadora_supermercado/
     ```
 2.  **Navegue até a pasta do projeto:**
     ```bash
