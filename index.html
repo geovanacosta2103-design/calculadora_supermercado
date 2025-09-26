@@ -38,14 +38,14 @@
     }
 
     .button-group {
-        display: flex;
-        gap: 10px;
+        display: flex;       
+        gap: 25px;
         margin-top: 10px;
     }
 
     #cart {
         margin-top: 20px;
-        width: 350px;
+        width: 400px;
         background-color: #fff;
         padding: 15px;
         border-radius: 8px;
@@ -89,6 +89,7 @@
 <h1>Carrinho de Compras</h1>
 
 <input type="number" id="productValue" placeholder="Digite o valor do produto">
+<input type="number" id="productQty" placeholder="Quantidade" min="1">
 <div class="button-group">
     <button onclick="addProduct()">Adicionar Produto</button>
     <button onclick="clearCart()">Limpar Carrinho</button>
@@ -106,18 +107,25 @@ let total = 0;
 
 // Adiciona produto ao carrinho
 function addProduct() {
-    const input = document.getElementById("productValue");
-    let value = parseFloat(input.value);
+    const valueInput = document.getElementById("productValue");
+    const qtyInput = document.getElementById("productQty");
+    let value = parseFloat(valueInput.value);
+    let qty = parseInt(qtyInput.value);
 
     if (isNaN(value) || value <= 0) {
         alert("Digite um valor válido!");
         return;
     }
+    if (isNaN(qty) || qty <= 0) {
+        alert("Digite uma quantidade válida!");
+        return;
+    }
 
-    cart.push(value); // adiciona ao array
-    recalcTotal(); // recalcula total e atualiza lista
-    input.value = "";
-    input.focus();
+    cart.push({ value, qty }); // adiciona objeto com valor e quantidade
+    recalcTotal(); 
+    valueInput.value = "";
+    qtyInput.value = "";
+    valueInput.focus();
 }
 
 // Limpa carrinho
@@ -136,12 +144,12 @@ function deleteProduct(index) {
 // Recalcula total aplicando desconto quando necessário
 function recalcTotal() {
     total = 0;
-    cart.forEach(v => {
-        if (v > 100) {
-            total += v * 0.9; // aplica 10% de desconto
-        } else {
-            total += v;
+    cart.forEach(item => {
+        let itemTotal = item.value * item.qty;
+        if (itemTotal > 100) {
+            itemTotal *= 0.9; // aplica 10% de desconto
         }
+        total += itemTotal;
     });
     updateCartDisplay();
 }
@@ -151,10 +159,11 @@ function updateCartDisplay() {
     const productList = document.getElementById("productList");
     productList.innerHTML = "";
 
-    cart.forEach((v, i) => {
-        let itemText = v > 100 
-            ? `Produto ${i + 1}: R$${v.toFixed(2)} (10% de desconto)` 
-            : `Produto ${i + 1}: R$${v.toFixed(2)}`;
+    cart.forEach((item, i) => {
+        let itemTotal = item.value * item.qty;
+        let itemText = itemTotal > 100 
+            ? `Produto ${i + 1}: R$${item.value.toFixed(2)} x ${item.qty} = R$${itemTotal.toFixed(2)} (-10%)` 
+            : `Produto ${i + 1}: R$${item.value.toFixed(2)} x ${item.qty} = R$${itemTotal.toFixed(2)}`;
 
         productList.innerHTML += `
             <li>
