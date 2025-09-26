@@ -38,11 +38,12 @@ Para ver a calculadora em funcionamento, siga os passos abaixo:
 Ou, se você configurou o GitHub Pages (o que fizemos!):
 
 4.  **Acesse via GitHub Pages:**
-    Vá para [GitHub Profile]`https://github.com/geovanacosta2103-design`  no seu navegador.
+   Go to https://geovanacosta2103-design.github.io/calculadora_supermercado/ in your browser.
+
 
 ## 🧑‍💻 Autor
 
-*   **geovanacosta2103** - [GitHub Profile](https://github.com/geovanacosta2103-design/)
+*   **geovanacosta2103** - [GitHub Profile](https://github.com/geovanacosta2103)
 
 ---
 
